@@ -1,0 +1,11 @@
+# Package Management
+node_modules/
+vendor/
+
+# Production-Ready Resources
+dist/
+
+
+# IntelliJ
+.idea/
+*.iml
