@@ -8,7 +8,7 @@ module.exports = (grunt) ->
     coffee:
       compile:
         expand: true
-        cwd: "src/coffee/"
+        cwd: "src/coffee"
         src: "**/*.coffee"
         dest: "dist/js/"
         ext: ".js"
@@ -25,7 +25,7 @@ module.exports = (grunt) ->
             "**/*.less"       # include all LESS files
             "!**/_*.less"     # unless they start with an _
           ]
-          dest: "dist/css"
+          dest: "dist/css/"
           ext: ".css"
         ]
 
@@ -39,6 +39,7 @@ module.exports = (grunt) ->
           amd: true
 
           processName: (filename) ->
+            # remove the `src/templates` prefix and .handlebars extension
             filename = filename.replace /^src\/templates\//, ""
             filename = filename.replace /\.handlebars$/, ""
 
@@ -53,14 +54,15 @@ module.exports = (grunt) ->
   # #########################################################################
   # Require.JS
   # #########################################################################
-    requirejs:
-      compile:
-        options:
-          mainConfigFile: "dist/js/build.js"
-          baseUrl: "dist/js"
-          name: "main"
-          include: ["build"]
-          out: "dist/js/main.min.js"
+  # TODO: `package` Task
+  #  requirejs:
+  #    compile:
+  #      options:
+  #        mainConfigFile: "dist/js/build.js"
+  #        baseUrl: "dist/js"
+  #        name: "main"
+  #        include: ["build"]
+  #        out: "dist/src/js/main.min.js"
 
   # #########################################################################
   # Connect Web Server
@@ -95,7 +97,8 @@ module.exports = (grunt) ->
 
         files: [
           "src/js/**"
-          "src/css"
+          "src/css/**"
+          "src/assets/**"
           "src/*.*"
         ]
 
@@ -107,42 +110,33 @@ module.exports = (grunt) ->
   # #########################################################################
     clean:
       dist: ["dist"]
+      plugins: ["plugins"]
 
   # #########################################################################
   # Copy
   # #########################################################################
     copy:
-    # TODO: Add Bower dependencies to copy from vendor/ to dist/**
-      dist:
-        files: [
-          "dist/vendor/require.js": "vendor/requirejs/require.js"
-          "dist/vendor/jquery.js": "vendor/jquery/jquery.js"
-          "dist/vendor/underscore.js": "vendor/underscore-amd/underscore.js"
-          "dist/vendor/backbone.js": "vendor/backbone-amd/backbone.js"
-          "dist/vendor/handlebars.js": "vendor/handlebars/handlebars.js"
-        ]
-
-    # TODO: Add source files that do not need compiling
       src:
         files: [
           expand: true
           cwd: "src/"
-          src: [
-            "css/**"  # CSS Files
-            "js/**"   # JS Files
-            "*.*"     # Root-level Files, i.e: index.html
+          src: [          # TODO: Add source files that do not need compiling
+            "js/**"       # JS Files
+            "css/**"      # CSS Files
+            "assets/**"   # Assets
+            "*.*"         # Root-level Files, i.e: index.html
           ]
           dest: "dist/"
         ]
 
-    # TODO: Add asset files here
-      assets:
+      plugins:
         files: [
           expand: true
-          cwd: "src/assets"
-          src: ["**"]
-          dest: "dist/"
+          cwd: "plugins"
+          src: "**"
+          dest: "dist/plugins/"
         ]
+
 
   # #########################################################################
   # Grunt Plugins
@@ -162,7 +156,7 @@ module.exports = (grunt) ->
   # #########################################################################
   grunt.registerTask "default", ["develop"]
 
-  grunt.registerTask "prepare", ["clean:dist", "copy:dist", "copy:src", "copy:assets"]
+  grunt.registerTask "prepare", ["clean:dist", "copy:src", "copy:plugins"]
   grunt.registerTask "compile", ["coffee:compile", "handlebars:compile", "less:compile"]
   grunt.registerTask "develop", ["prepare", "compile", "connect:server", "watch"]
   grunt.registerTask "package", []

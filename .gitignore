@@ -1,6 +1,6 @@
 # Package Management
 node_modules/
-vendor/
+plugins/
 
 # Production-Ready Resources
 dist/

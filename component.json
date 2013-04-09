@@ -1,11 +1,11 @@
 {
-    "name": "icona-stack",
-    "version": "0.0.1",
-    "dependencies": {
-        "requirejs": null,
-        "jquery": null,
-        "backbone-amd": null,
-        "underscore-amd": null,
-        "handlebars": null
-    }
+  "name": "icona-stack",
+  "version": "0.0.1",
+  "dependencies": {
+    "requirejs": null,
+    "jquery": null,
+    "backbone-amd": null,
+    "lodash": null,
+    "handlebars": null
+  }
 }
