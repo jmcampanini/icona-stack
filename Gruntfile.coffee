@@ -139,7 +139,7 @@ module.exports = (grunt) ->
       assets:
         files: [
           expand: true
-          cwd: "assets"
+          cwd: "src/assets"
           src: ["**"]
           dest: "dist/"
         ]
