@@ -1,10 +1,10 @@
 require.config
   deps: ["main"]
   paths:
-    "jquery": "../vendor/jquery"
-    "underscore": "../vendor/underscore"
-    "backbone": "../vendor/backbone"
-    "handlebars": "../vendor/handlebars"
+    "jquery": "../plugins/jquery/jquery"
+    "underscore": "../plugins/lodash/lodash"
+    "backbone": "../plugins/backbone-amd/backbone"
+    "handlebars": "../plugins/handlebars/handlebars"
 
   shim:
     "handlebars":
