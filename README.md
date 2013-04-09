@@ -5,7 +5,7 @@ A starter kit for client-side web development. The stack includes:
 - `grunt` - workflow automation
 - `require.js` - dependency management
 - `jQuery` - DOM manipulation
-- `Underscore` - helpful functionality
+- `lodash` - helpful functionality
 - `Backbone` - application structure
 - `Handlebars` - JavaScript templating
 - `LESS` - CSS language
@@ -41,24 +41,23 @@ The directory structure is setup in 2 phases: pre-compiled + post-compiled. The 
 	├── Gruntfile.coffee                  - Grunt Configuration
 	├── package.json                      - NPM Dependencies
 	├── README.md                         - this file
-	├── assets                            - project assets: images, fonts, etc.
-	│   ├── fonts
-	│   └── images
 	├── dist                              - Distribution - the built project
 	├── docs                              - Documentation
 	├── src
 	│   ├── index.html                    - HTML files can live here
+	│   ├── assets                        - project assets: images, fonts, etc.
+	│   │   └── images
 	│   ├── coffee                        - CoffeeScript Code
 	│   │   ├── build.coffee              - Require.js Configuration
 	│   │   └── main.coffee               - Application Endpoint
 	│   ├── css                           - CSS Code
 	│   ├── js                            - JS Code
 	│   ├── less                          - LESS Code
-	│   │   ├── _included.less            - Exclude '_' prefixed files
+	│   │   ├── _imported.less            - Exclude '_' prefixed files
 	│   │   └── app.less
 	│   └── templates                     - Handlebar Templates
 	├── tests                             - Tests
-	└── vendor                            - Bower Install Directory
+	└── plugins                            - Bower Install Directory
 	
 	
 Build Process
@@ -66,13 +65,13 @@ Build Process
 The build process does the following
 
 1. Wipes the `dist` directory.
-2. Copies over files from the `bower` dependencies in the `vendor` directory.
+2. Copies over files from the `bower` dependencies in the `plugins` directory.
 3. Copies over non-compilable code from `src`. This includes:
 	1. Javascript files from `src/js`.
 	2. CSS files from `src/css`.
-	3. Any file in `src`.
-4. Copies over the `assets` sub-directories to `dist`.
-5. Compiles the CoffeeScript, Handlebars, and LESS files from `src` to `dist`.
+	3. All assets from `src/assets`.
+	4. Any file in `src`.
+4. Compiles the CoffeeScript, Handlebars, and LESS files from `src` to `dist`.
 
 
 Grunt Tasks
@@ -81,7 +80,7 @@ Grunt Tasks
 ### `prepare`
 1. Erase the `dist` folder
 2. Copy over the files that won't be compiled from `src` to `dist`.
-3. Copy over the `assets` files to `dist`.
+3. Copy over the `plugins` to `dist`.
 
 ### `compile`
 1. Compile the CoffeeScript files in `src/coffee/**/*.coffee`.
