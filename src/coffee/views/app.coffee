@@ -1,5 +1,4 @@
 define ["jquery", "backbone", "templates/test"], ($, Backbone, AppTemplates) ->
-
   class AppView extends Backbone.View
 
     initialize: ->

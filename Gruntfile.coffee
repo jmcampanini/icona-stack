@@ -77,20 +77,28 @@ module.exports = (grunt) ->
   # Watch
   # #########################################################################
     watch:
-    # compile the source files
-      compile:
+      coffee:
         options:
           debounceDelay: 1000
 
-        files: [
-          "src/coffee/**/*.coffee"
-          "src/templates/**/*.handlebars"
-          "src/less/**/*.less"
-        ]
+        files: ["src/coffee/**"]
+        tasks: ["coffee:compile"]
 
-        tasks: ["compile"]
+      less:
+        options:
+          debounceDelay: 1000
 
-    # copy the source files that do not need compiling
+        files: ["src/less/**"]
+        tasks: ["less:compile"]
+
+
+      handlebars:
+        options:
+          debounceDelay: 1000
+
+        files: ["src/templates/**"]
+        tasks: ["handlebars:compile"]
+
       other:
         options:
           debounceDelay: 1000
@@ -103,7 +111,6 @@ module.exports = (grunt) ->
         ]
 
         tasks: ["copy:src"]
-
 
   # #########################################################################
   # Clean
@@ -157,6 +164,6 @@ module.exports = (grunt) ->
   grunt.registerTask "default", ["develop"]
 
   grunt.registerTask "prepare", ["clean:dist", "copy:src", "copy:plugins"]
-  grunt.registerTask "compile", ["coffee:compile", "handlebars:compile", "less:compile"]
-  grunt.registerTask "develop", ["prepare", "compile", "connect:server", "watch"]
+  grunt.registerTask "compile-all", ["coffee:compile", "handlebars:compile", "less:compile"]
+  grunt.registerTask "develop", ["prepare", "compile-all", "connect:server", "watch"]
   grunt.registerTask "package", []
