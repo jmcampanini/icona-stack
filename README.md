@@ -56,7 +56,7 @@ The directory structure is setup in 2 phases: pre-compiled + post-compiled. The 
 	│   │   ├── _imported.less            - Exclude '_' prefixed files
 	│   │   └── app.less
 	│   └── templates                     - Handlebar Templates
-	├── tests                             - Tests
+	├── test                              - Tests
 	└── plugins                           - Bower Install Directory
 	
 	
