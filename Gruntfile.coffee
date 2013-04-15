@@ -58,14 +58,22 @@ module.exports = (grunt) ->
   # Require.JS
   # #########################################################################
   # TODO: `package` Task
-  #  requirejs:
-  #    compile:
-  #      options:
-  #        mainConfigFile: "dist/js/build.js"
-  #        baseUrl: "dist/js"
-  #        name: "main"
-  #        include: ["build"]
-  #        out: "dist/src/js/main.min.js"
+    requirejs:
+      compile:
+        options:
+          mainConfigFile: "dist/js/build.js"
+          baseUrl: "dist/js"
+          name: "main"
+          include: ["requireLib", "build"]
+          out: "dist/js/compiled.min.js"
+
+          optimize: "uglify2"
+
+          paths:
+            requireLib: "../plugins/requirejs/require"
+
+          uglify2:
+            warnings: true
 
   # #########################################################################
   # Connect Web Server
@@ -121,6 +129,7 @@ module.exports = (grunt) ->
     clean:
       dist: ["dist"]
       plugins: ["plugins"]
+      "package-prep": ["dist/plugins"]
 
   # #########################################################################
   # Copy
@@ -178,4 +187,6 @@ module.exports = (grunt) ->
   grunt.registerTask "develop", ["connect:server"
                                  "watch"]
 
-  grunt.registerTask "package", []
+  grunt.registerTask "package", ["prepare"
+                                 "requirejs"
+                                 "clean:package-prep"]
