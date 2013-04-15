@@ -77,18 +77,17 @@ The build process does the following
 Grunt Tasks
 -----------
 
-### `prepare`
-1. Erase the `dist` folder
-2. Copy over the files that won't be compiled from `src` to `dist`.
-3. Copy over the `plugins` to `dist`.
-
-### `compile`
+### `compile-all`
 1. Compile the CoffeeScript files in `src/coffee/**/*.coffee`.
 1. Compile the Handlebars files in `src/templates/**/*.handlebars`.
 1. Compile the LESS files in `src/less/**/*.less`.
 
-### `develop`
-1. `prepare`
-2. `compile`
-3. Start a `connect` server. The URL is: [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
-4. `watch` for changes to copy/recompile to update `dist`.
+### `prepare`
+1. Erase the `dist` folder
+2. Copy over the files that won't be compiled from `src` to `dist`.
+3. Copy over the `plugins` to `dist`.
+4. Compiles everything using `compile-all`
+
+### `develop` - Default
+1. Start a `connect` server. The URL is: [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
+2. `watch` for changes to copy/recompile to update `dist`.
