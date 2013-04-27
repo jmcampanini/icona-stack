@@ -110,7 +110,7 @@ module.exports = (grunt) ->
         files: ["src/templates/**"]
         tasks: ["handlebars:compile"]
 
-      other:
+      src:
         options:
           debounceDelay: 1000
 
@@ -156,7 +156,6 @@ module.exports = (grunt) ->
           dest: "dist/plugins/"
         ]
 
-
   # #########################################################################
   # Grunt Plugins
   # #########################################################################
@@ -168,7 +167,6 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks "grunt-contrib-less"
   grunt.loadNpmTasks "grunt-contrib-requirejs"
   grunt.loadNpmTasks "grunt-contrib-watch"
-
 
   # #########################################################################
   # Tasks
